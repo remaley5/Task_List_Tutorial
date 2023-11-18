@@ -8,7 +8,7 @@ if(document.cookie.includes("session_token")) {
     landingSection.classList.add("hidden");
     homeSection.classList.remove("hidden");
     reloadItems();
-}
+} 
 
 // Api Call Helper
 async function callApi(api, method, data) {
@@ -77,7 +77,7 @@ document.getElementById("createItemForm").addEventListener("submit", (event) => 
     const title = document.getElementById("newItemTitle").value;
 
     errorHandler.textContent = "";
-    
+
     callApi("item", "POST", {title}).then(() => {
         document.getElementById("newItemTitle").value = "";
         reloadItems(); 
@@ -90,13 +90,21 @@ document.getElementById("createItemForm").addEventListener("submit", (event) => 
 
 function reloadItems() {
     callApi("/item/foruser", "GET").then((data) => {
-        console.log('Got the items!', data);
         const itemList = document.getElementById("itemList");
 
         const createItem = (title, id) => {
             const itemElem = document.createElement("li");
+            const itemBtn = document.createElement("button");
+
             itemElem.classList.add("itemRow", "centeredText", "subheader_text");
-            itemElem.textContent = title;
+            itemBtn.textContent = title;
+            
+            itemBtn.addEventListener("click", function(e) {
+                e.preventDefault();
+                document.getElementById("itemDialog").showModal();
+            });
+            
+            itemElem.append(itemBtn);
             itemList.appendChild(itemElem);
         }
 
@@ -105,11 +113,35 @@ function reloadItems() {
         } else {
             itemList.innerHTML = "";
             itemList.classList.remove("hidden");
-            data.forEach(function(item) {
+            for(const item of data) {
                 createItem(item.title, item.id);
-            });
+            };
         }
     }).catch((e) => {
         console.log('Error getting items: ', e);
     });
 }
+
+
+/////////////// ITEM POPUP ///////////////
+
+function closeItemDialog() {
+    document.getElementById("itemDialog").close();
+}
+
+document.getElementById("itemDialogEdit").addEventListener("click", function(e) {
+    e.preventDefault();
+    closeItemDialog();
+});
+
+
+document.getElementById("itemDialogDelete").addEventListener("click", function(e) {
+    e.preventDefault();
+    closeItemDialog
+});
+
+document.getElementById("itemDialogClose").addEventListener("click", function(e) {
+    console.log('clicking close');
+    e.preventDefault();
+    closeItemDialog();
+});

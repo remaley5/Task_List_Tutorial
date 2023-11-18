@@ -16,7 +16,8 @@
         </div>
     </header>
     <main>
-        <section id="landingSection">
+        <!-- LOGGED OUT -->
+        <div id="landingSection">
             <section id="signupSection">
                 <h1 class="centered_text section_title">Sign Up</h1>
                 <form id="signupForm" class="formSection" style="margin-top: 8px;">
@@ -45,11 +46,30 @@
                     <button type="submit" class="subheader_text centered_text submitButton">Login</button>
                 </form>
             </section>
-        </section>
-        <section id="homeSection" class="hidden">
+        </div>
+
+
+        <!-- LOGGED IN -->
+        <div id="homeSection" class="hidden">
             <h1 class="centered_text page_title">Home</h1>
             <section id="itemSection">
-                <h2 class="centered_text section_title">Items</h2>
+                <h2 class="centered_text section_title">Current Items</h2>
+
+                <!-- ITEM DIALOG -->
+                <dialog id="itemDialog" aria-labelledby="itemDialogTitle" class="purple_middle_bg" >
+                    <div class="itemDialog">
+                        <button id="itemDialogClose" class="dialogCloseBtn">X</button>
+                        <h2 id="itemDialogTitle" class="centered_text dialog_title">Item Options</h2>
+                        <button id="itemDialogEdit" class="subheader_text centered_text submitButton">
+                            Edit
+                        </button>
+                        <button id="itemDialogDelete" class="subheader_text centered_text submitButton">
+                            Delete
+                        </button>
+                    </div>
+                </dialog>
+
+                <!-- ITEM LIST -->
                 <div id="noItems" class="itemRow hidden">No items!</div>
                 <ul id="itemList" class="itemList hidden">
                 </ul>
@@ -57,18 +77,22 @@
             <section id="createItemsSection">
                 <h2 class="centered_text section_title">Add New Item</h2>
                 <form id="createItemForm" class="formSection" style="margin-top: 8px;">
+
                     <!-- Refactor for accessibility -->
                     <div id="createItemFormError" class="lightlabel_text centered_text error-red formError"></div>
 
-
                     <label class="subheader_text centered_text formHeader" for="newItemTitle">Item Title</label>
+
                     <input type="text" id="newItemTitle" class="centered_text subheader_text textField">
 
                     <button type="submit" class="subheader_text centered_text submitButton">Create</button>
+
                 </form>
             </section>
-        </section>
+        </div>
     </main>
+
+
     <script src="script.js"></script>
 </body>
 

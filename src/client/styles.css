@@ -11,11 +11,16 @@ body {
     margin-right: 19px;
     margin-left: 19px;
     /* Figure out why this is happening */
-    padding-bottom: 400px;
+    /* padding-bottom: 400px; */
+    padding-bottom: 20px;
 }
 
 header {
     width: 100%;
+}
+
+button {
+    all: unset;
 }
 
 .purple_bg {
@@ -36,10 +41,13 @@ header {
     width: 100%;
     padding: 0px;
 }
+
 .itemRow {
     border: 2px solid #000;
     padding: 13px;
     margin-bottom: 18px;
+    word-break: break-all;
+    cursor: pointer;
 }
 
 /* Typography */
@@ -56,6 +64,11 @@ header {
     margin: auto;
     margin-top: 30px;
     margin-bottom: 30px;
+    font-weight: normal;
+}
+
+.dialog_title {
+    margin: auto;
     font-weight: normal;
 }
 
@@ -117,7 +130,41 @@ header {
     margin-top: 30px;
 }
 
-
 .formError {
     margin-top: 8px;
+}
+
+/* DIALOG */
+
+#itemDialog {
+    width: 100%;
+}
+
+.itemDialog {
+    display: flex;
+    flex-direction: column;
+    color:white;
+    margin: 17px 22px;
+}
+
+.dialogCloseBtn {
+    background: white;
+    color: black;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    align-self:flex-end;
+    border: 2px solid white;
+}
+
+/* Buttons */
+
+/* ~ UPDATE THIS ~ */
+.itemRow:focus, .itemRow:hover, .submitButton:focus, .submitButton:hover {
+    opacity: .7;
+}
+
+.dialogCloseBtn:focus {
+    border: 2px solid var(--purple-top);
 }
