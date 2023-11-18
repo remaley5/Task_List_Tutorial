@@ -1,0 +1,121 @@
+* {
+    --purple: #C63FD2;
+    --purple-middle: #800080;
+    --purple-top: #D567BD;
+    --pink: #FFC0CB;
+    --error-red: #D22845;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin-right: 19px;
+    margin-left: 19px;
+}
+
+header {
+    width: 100%;
+}
+
+.purple_bg {
+    background-color: var(--purple);
+}
+
+.purple_middle_bg {
+    background-color: var(--purple-middle);
+}
+
+.hidden {
+    display: none;
+}
+
+/* Items */
+.itemList {
+    list-style: none;
+    width: 100%;
+    padding: 0px;
+}
+.itemRow {
+    border: 2px solid #000;
+    padding: 13px;
+    margin-bottom: 18px;
+}
+
+/* Typography */
+.header_text {
+    color: white;
+    font-family: Inter, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 32px;
+}
+
+.section_title {
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-weight: normal;
+}
+
+.subheader_text {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000;
+    text-align: center;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: lighter;
+    line-height: normal;
+    letter-spacing: .04em;
+}
+
+.centered_text {
+    text-align: center;
+}
+
+.formHeader {
+    margin-bottom: 8px;
+    padding-top: 10px;
+}
+
+.topHeader {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.lightlabel_text {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 22px;
+    letter-spacing: 0em;
+}
+
+.error-red {
+    color: var(--error-red);
+}
+
+/* Forms */
+.formSection {
+    padding: 16px;
+    background-color: var(--pink);
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.textField {
+    height: 50px;
+}
+
+.submitButton {
+    height: 57px;
+    background-color: var(--purple-top);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    margin-top: 30px;
+}
+
+
+.formError {
+    margin-top: 8px;
+}

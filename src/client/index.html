@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles.css" rel="stylesheet">
+    <title>Task List app</title>
+</head>
+
+<body>
+    <header class="purple_bg">
+        <div class="topHeader header_text centered_text">
+            Task App
+        </div>
+    </header>
+    <section id="loginSection">
+        <h1 class="centered_text section_title">Log In</h1>
+        <form id="loginForm" class="formSection" style="margin-top: 8px;">
+            <!-- Refactor errors for accessibility -->
+            <div id="loginFormError" class="lightlabel_text centered_text error-red formError"></div>
+            <label class="subheader_text centered_text formHeader" for="loginUsername">Username</label>
+            <input type="text" id="loginUsername" class="centered_text subheader_text textField">
+
+            <label class="subheader_text centered_text formHeader" for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" class="centered_text subheader_text textField">
+
+            <button type="submit" class="subheader_text centered_text submitButton">Login</button>
+        </form>
+    </section>
+    <section id="homeSection" class="hidden">
+        <h1 class="centered_text page_title">Home</h1>
+        <section id="itemSection">
+            <h2 class="centered_text section_title">Items</h2>
+            <div class="itemRow">No items!</div>
+            <!-- <ul class="itemList">
+                <li class="itemRow">1. Item number one!</div>
+            </ul> -->
+        </section>
+        <section id="createItemsSection">
+            <h2 class="centered_text section_title">Add New Item</h2>
+            <form id="createItemForm" class="formSection" style="margin-top: 8px;">
+                <!-- Refactor errors for accessibility -->
+                <div id="createItemFormError" class="lightlabel_text centered_text error-red formError"></div>
+                <label class="subheader_text centered_text formHeader" for="createItemTitle">Item Title</label>
+                <input type="text" id="createItemTitle" class="centered_text subheader_text textField">
+
+                <button type="submit" class="subheader_text centered_text submitButton">Create</button>
+            </form>
+        </section>
+    </section>
+    <script src="script.js"></script>
+</body>
+
+</html>
