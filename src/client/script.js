@@ -1,6 +1,13 @@
+const landingSection = document.getElementById("landingSection");
 const loginSection = document.getElementById("loginSection");
 const homeSection = document.getElementById("homeSection");
 
+/////////////// Stay Logged In ///////////////
+
+if(document.cookie.includes("session_token")) {
+    landingSection.classList.add("hidden");
+    homeSection.classList.remove("hidden");
+}
 
 // Api Call Helper
 async function callApi(api, method, data) {
@@ -13,19 +20,34 @@ async function callApi(api, method, data) {
     });
 
     if (!result.ok) {
+        console.log('result', result);
         throw new Error();
     }
 
     return result.json();
 }
 
+
+/////////////// Sign Up ///////////////
+
+document.getElementById("signupForm").addEventListener("submit", (event) => {
+    const errorHandler = document.getElementById("signupFormError");
+    event.preventDefault();
+
+    const username = document.getElementById("signupUsername").value;
+    const password = document.getElementById("signupPassword").value;
+
+    callApi("user/", "POST", {username, password}).then((data) => {
+        console.log("success");
+        landingSection.classList.add("hidden");
+        homeSection.classList.remove("hidden");
+    }).catch((e) => {
+        console.log("error = ", e);
+        errorHandler.textContent = "Error signing up!";
+    });
+});
+
 /////////////// LOG IN ///////////////
-
-if(document.cookie.includes("session_token")) {
-    loginSection.classList.add("hidden");
-    homeSection.classList.remove("hidden");
-}
-
 
 document.getElementById("loginForm").addEventListener("submit", (event) => {
     const errorHandler = document.getElementById("loginFormError");
@@ -36,7 +58,7 @@ document.getElementById("loginForm").addEventListener("submit", (event) => {
 
     callApi("user/login", "POST", {username, password}).then((data) => {
         console.log("success");
-        loginSection.classList.add("hidden");
+        landingSection.classList.add("hidden");
         homeSection.classList.remove("hidden");
     }).catch((e) => {
         console.log("error = ", e);

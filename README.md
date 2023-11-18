@@ -1,6 +1,9 @@
-Tutorial: https://www.youtube.com/watch?v=Lp7pM2qURSA
+[Task Manager Tutorial](https://www.youtube.com/watch?v=Lp7pM2qURSA)
+[Figma Design Frames](https://www.figma.com/file/caeFhJVCWW2GC7BT9z71yT/Untitled?type=design&node-id=1%3A2&mode=dev)
 
-Notes add for accessibility 
-- Individual errors/ descriptive/ required
-- Autocomplete
-- Headings
+Accessibility changes
+- [ ] Individual errors/ descriptive/ required
+- [ ] Autocomplete
+- [ ] Headings
+- [ ] Landmarks
+

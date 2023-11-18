@@ -16,7 +16,7 @@ userRouter.post("/", async (req, res) => {
 
     if(existingUser) {
         // ends request but does not return
-        res.status(409).end();
+        res.status(409).send({message: "user already exists!"}).end();
         return;
     }
 
@@ -25,6 +25,16 @@ userRouter.post("/", async (req, res) => {
         password,
     });
     
+    // Create token - install jsonwebtoken
+    const token = jwt.sign({
+        id: newUser.id,
+    }, process.env.JWT_KEY);
+    
+    res.cookie("session_token", token, {
+        // 5 hours
+        maxAge: 1000 * 60 * 60 * 5,
+    });
+
     return res.status(200).json({
         id: newUser.id,
     });
@@ -66,4 +76,5 @@ userRouter.post("/login", async (req, res) => {
         id: existingUser.id,
     }).end();
 });
+
 module.exports = userRouter;
