@@ -2,11 +2,12 @@ const landingSection = document.getElementById("landingSection");
 const loginSection = document.getElementById("loginSection");
 const homeSection = document.getElementById("homeSection");
 
-/////////////// Stay Logged In ///////////////
+/////////////// LOADING HOME SECTION ///////////////
 
 if(document.cookie.includes("session_token")) {
     landingSection.classList.add("hidden");
     homeSection.classList.remove("hidden");
+    reloadItems();
 }
 
 // Api Call Helper
@@ -41,6 +42,7 @@ document.getElementById("signupForm").addEventListener("submit", (event) => {
         console.log("success");
         landingSection.classList.add("hidden");
         homeSection.classList.remove("hidden");
+        reloadItems();
     }).catch((e) => {
         console.log("error = ", e);
         errorHandler.textContent = "Error signing up!";
@@ -60,6 +62,7 @@ document.getElementById("loginForm").addEventListener("submit", (event) => {
         console.log("success");
         landingSection.classList.add("hidden");
         homeSection.classList.remove("hidden");
+        reloadItems();
     }).catch((e) => {
         console.log("error = ", e);
         errorHandler.textContent = "Error logging in!";
@@ -74,9 +77,39 @@ document.getElementById("createItemForm").addEventListener("submit", (event) => 
     const title = document.getElementById("newItemTitle").value;
 
     errorHandler.textContent = "";
+    
     callApi("item", "POST", {title}).then(() => {
-
+        document.getElementById("newItemTitle").value = "";
+        reloadItems(); 
     }).catch((e) => {
         errorHandler.textContent = "Error Creating Item!";
     });
 });
+
+/////////////// LOAD ITEMS ///////////////
+
+function reloadItems() {
+    callApi("/item/foruser", "GET").then((data) => {
+        console.log('Got the items!', data);
+        const itemList = document.getElementById("itemList");
+
+        const createItem = (title, id) => {
+            const itemElem = document.createElement("li");
+            itemElem.classList.add("itemRow", "centeredText", "subheader_text");
+            itemElem.textContent = title;
+            itemList.appendChild(itemElem);
+        }
+
+        if(data.length === 0) {
+            document.getElementById("#noItems").classList.remove("hidden");
+        } else {
+            itemList.innerHTML = "";
+            itemList.classList.remove("hidden");
+            data.forEach(function(item) {
+                createItem(item.title, item.id);
+            });
+        }
+    }).catch((e) => {
+        console.log('Error getting items: ', e);
+    });
+}
