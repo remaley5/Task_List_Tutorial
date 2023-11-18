@@ -18,4 +18,17 @@ itemRouter.post('/', auth, async (req, res) => {
     });
 });
 
+itemRouter.get('/foruser', auth, async (req, res) => {
+    const items = await Item.findAll({
+        where: {
+            userId: req.user_id,
+        },
+    });
+
+    // Items come out as complex sequelize instances
+    const plainItems = items.map((item) => item.get({plan: true}));
+
+    res.status(200).json(plainItems);
+});
+
 module.exports = itemRouter;
