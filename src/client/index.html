@@ -54,19 +54,32 @@
             <h1 class="centered_text page_title">Home</h1>
             <section id="itemSection">
                 <h2 class="centered_text section_title">Current Items</h2>
-
                 <!-- ITEM DIALOG -->
-                <dialog id="itemDialog" aria-labelledby="itemDialogTitle" class="purple_middle_bg" >
-                    <div class="itemDialog">
-                        <button id="itemDialogClose" class="dialogCloseBtn">X</button>
-                        <h2 id="itemDialogTitle" class="centered_text dialog_title">Item Options</h2>
-                        <button id="itemDialogEdit" class="subheader_text centered_text submitButton">
+                <dialog id="itemDialog" aria-labelledby="itemDialogTitle" class="purple_middle_bg">
+                    <button id="itemDialog_close" class="dialogCloseBtn">X</button>
+                    <div id="itemDialogStageDefault" class="itemDialog">
+                        <h2 class="centered_text dialog_title">Task Options: </h2>
+                        <button id="itemDialog_edit" class="subheader_text centered_text submitButton">
                             Edit
                         </button>
-                        <button id="itemDialogDelete" class="subheader_text centered_text submitButton">
+                        <button id="itemDialog_delete" class="subheader_text centered_text submitButton">
                             Delete
                         </button>
                     </div>
+
+
+                    <!-- EDIT TASK -->
+                    <div id="itemDialogStageEdit" class="itemDialog hidden">
+
+                        <h2 class="centered_text dialog_title">Edit Task: </h2>
+                        <form>
+                            <label class="subheader_text centered_text formHeader" for="editTaskTitle">New Task
+                                Title</label>
+                            <textarea type="password" id="itemDialog_EditTitle" class="centered_text subheader_text textField"></textarea>
+                            <button id="itemDialog_saveEdit" type="submit" class="subheader_text centered_text submitButton">Save Changes</button>
+                        </form>
+                    </div>
+                        
                 </dialog>
 
                 <!-- ITEM LIST -->

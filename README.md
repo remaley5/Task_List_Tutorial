@@ -13,8 +13,10 @@
 - [ ] Individual errors
 - [ ] Required field marked properly
 - [ ] Autocomplete
+- [ ] Add Confirmation 
 
 ### Dialog
 - [x] Keyboard: Use dialog HTML5 element for modal popup
 - [x] Label
-- [x] Add close button 
+- [x] Add Close button 
+- [ ] Add Back Button

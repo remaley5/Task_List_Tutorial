@@ -3,12 +3,14 @@ const loginSection = document.getElementById("loginSection");
 const homeSection = document.getElementById("homeSection");
 
 /////////////// LOADING HOME SECTION ///////////////
-
-if(document.cookie.includes("session_token")) {
+console.log('hey there');
+if (document.cookie.includes("session_token")) {
     landingSection.classList.add("hidden");
     homeSection.classList.remove("hidden");
     reloadItems();
-} 
+} else {
+    console.log('no session token!')
+}
 
 // Api Call Helper
 async function callApi(api, method, data) {
@@ -38,7 +40,7 @@ document.getElementById("signupForm").addEventListener("submit", (event) => {
     const username = document.getElementById("signupUsername").value;
     const password = document.getElementById("signupPassword").value;
 
-    callApi("user/", "POST", {username, password}).then((data) => {
+    callApi("user/", "POST", { username, password }).then((data) => {
         console.log("success");
         landingSection.classList.add("hidden");
         homeSection.classList.remove("hidden");
@@ -58,7 +60,7 @@ document.getElementById("loginForm").addEventListener("submit", (event) => {
     const username = document.getElementById("loginUsername").value;
     const password = document.getElementById("loginPassword").value;
 
-    callApi("user/login", "POST", {username, password}).then((data) => {
+    callApi("user/login", "POST", { username, password }).then((data) => {
         console.log("success");
         landingSection.classList.add("hidden");
         homeSection.classList.remove("hidden");
@@ -68,7 +70,7 @@ document.getElementById("loginForm").addEventListener("submit", (event) => {
         errorHandler.textContent = "Error logging in!";
     });
 });
- 
+
 /////////////// ADD ITEM ///////////////
 
 document.getElementById("createItemForm").addEventListener("submit", (event) => {
@@ -78,9 +80,9 @@ document.getElementById("createItemForm").addEventListener("submit", (event) => 
 
     errorHandler.textContent = "";
 
-    callApi("item", "POST", {title}).then(() => {
+    callApi("item", "POST", { title }).then(() => {
         document.getElementById("newItemTitle").value = "";
-        reloadItems(); 
+        reloadItems();
     }).catch((e) => {
         errorHandler.textContent = "Error Creating Item!";
     });
@@ -96,24 +98,24 @@ function reloadItems() {
             const itemElem = document.createElement("li");
             const itemBtn = document.createElement("button");
 
-            itemElem.classList.add("itemRow", "centeredText", "subheader_text");
+            itemElem.classList.add("itemRow", "subheader_text");
             itemBtn.textContent = title;
-            
-            itemBtn.addEventListener("click", function(e) {
+
+            itemBtn.addEventListener("click", function (e) {
                 e.preventDefault();
                 document.getElementById("itemDialog").showModal();
             });
-            
+
             itemElem.append(itemBtn);
             itemList.appendChild(itemElem);
         }
 
-        if(data.length === 0) {
+        if (data.length === 0) {
             document.getElementById("#noItems").classList.remove("hidden");
         } else {
             itemList.innerHTML = "";
             itemList.classList.remove("hidden");
-            for(const item of data) {
+            for (const item of data) {
                 createItem(item.title, item.id);
             };
         }
@@ -123,25 +125,36 @@ function reloadItems() {
 }
 
 
-/////////////// ITEM POPUP ///////////////
+// /////////////// ITEM POPUP ///////////////
 
 function closeItemDialog() {
     document.getElementById("itemDialog").close();
+    document.getElementById("itemDialogStageDefault").classList.remove("hidden");
+    document.getElementById("itemDialogStageEdit").classList.add("hidden");
 }
 
-document.getElementById("itemDialogEdit").addEventListener("click", function(e) {
+function showItemEditStage() {
+    document.getElementById("itemDialogStageDefault").classList.add("hidden");
+    document.getElementById("itemDialogStageEdit").classList.remove("hidden");
+}
+
+document.getElementById("itemDialog_edit").addEventListener("click", function (e) {
+    e.preventDefault();
+    showItemEditStage();
+});
+
+
+document.getElementById("itemDialog_delete").addEventListener("click", function (e) {
     e.preventDefault();
     closeItemDialog();
 });
 
-
-document.getElementById("itemDialogDelete").addEventListener("click", function(e) {
+document.getElementById('itemDialog_close').addEventListener("click", function (e) {
     e.preventDefault();
-    closeItemDialog
+    closeItemDialog();
 });
 
-document.getElementById("itemDialogClose").addEventListener("click", function(e) {
-    console.log('clicking close');
+document.getElementById("itemDialog_saveEdit").addEventListener("click", function (e) {
     e.preventDefault();
     closeItemDialog();
 });
